@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+
+	<!-- appender per la console -->
+	<appender name="consoleApp" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+
+			<param name="ConversionPattern" value=" %d{dd-MMM HH:mm:ss} [%c{1}.%M] [%L] %p - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="file1App" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="Append" value="true" />
+		<param name="DatePattern" value=".yyyy-MM-dd" />
+		<param name="File" value="${logpath}coins.log" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d [%t] [%C.%M] [%L] %p - %m%n" />
+		</layout>
+	</appender>
+
+	<category name="com.nxsystems.payanycard">
+		<priority value="debug" />
+		<appender-ref ref="consoleApp" />
+		<appender-ref ref="file1App" />
+	</category>
+
+	<root>
+		<priority value="debug" />
+		<appender-ref ref="consoleApp" />
+		<appender-ref ref="file1App" />
+	</root>
+
+</log4j:configuration>
